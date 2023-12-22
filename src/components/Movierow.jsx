@@ -1,5 +1,7 @@
+/* eslint-disable react/prop-types */
 import axios from "axios";
 import { useEffect, useState } from "react";
+import MovieItem from "./MovieItem";
 
 const Movierow = ({ title, url }) => {
   const [movies, setMovies] = useState([]);
@@ -7,7 +9,9 @@ const Movierow = ({ title, url }) => {
   useEffect(() => {
     axios.get(url).then((response) => setMovies(response.data.results));
   }, [url]);
+
   console.log(movies);
+
   return (
     <>
       <h2 className="font-nsans-bold md:text-xl p-4 capitalize">{title}</h2>
@@ -16,7 +20,7 @@ const Movierow = ({ title, url }) => {
           id={`slider`}
           className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide">
           {movies.map((movie) => (
-            <h1 key={movie.id}>{movie.title}</h1>
+            <MovieItem key={movie.id} movie={movie} />
           ))}
         </div>
       </div>
